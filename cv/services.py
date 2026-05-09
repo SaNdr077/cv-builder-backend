@@ -18,7 +18,6 @@
         
 #         browser.close()
 #         return pdf_bytes
-
 from playwright.sync_api import sync_playwright
 
 def generate_resume_pdf(html_content):
@@ -29,21 +28,35 @@ def generate_resume_pdf(html_content):
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
                 "--disable-dev-shm-usage",
+                "--disable-gpu",
             ]
         )
 
         page = browser.new_page()
 
-        page.set_content(
-            html_content,
-            wait_until="networkidle"
-        )
+        # HTML load
+        page.set_content(html_content, wait_until="networkidle")
 
+        # full content height
+        content_height = page.evaluate("""
+            () => Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+            )
+        """)
+
+        # PDF generation (your original approach restored)
         pdf_bytes = page.pdf(
-            format="A4",
-            print_background=True
+            width="210mm",
+            height=f"{content_height}px",
+            print_background=True,
+            margin={
+                "top": "0",
+                "right": "0",
+                "bottom": "0",
+                "left": "0"
+            }
         )
 
         browser.close()
-
         return pdf_bytes
