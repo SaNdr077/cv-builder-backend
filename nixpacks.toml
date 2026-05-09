@@ -1,14 +1,15 @@
-PLAYWRIGHT_BROWSERS_PATH = "/app/pw-browsers"
+[variables]
+    PLAYWRIGHT_BROWSERS_PATH = "/opt/pw-browsers"
+    XDG_CACHE_HOME = "/tmp/.cache"
 
 [phases.setup]
-nixPkgs = ["python311", "playwright-driver", "playwright"]
-
+    nixPkgs = ["python311", "playwright-driver", "pango", "cairo", "glib", "nss", "nspr", "atk", "dbus", "libdrm", "mesa", "libxkbcommon"]
 
 [phases.build]
-cmds = [
-    "pip install -r requirements.txt",
-    "python -m playwright install --with-deps chromium"
-]
+    cmds = [
+        "pip install -r requirements.txt",
+        "playwright install chromium"
+    ]
 
 [start]
-cmd = "python manage.py collectstatic --noinput && gunicorn core.wsgi"
+    cmd = "python manage.py collectstatic --noinput && gunicorn core.wsgi"
