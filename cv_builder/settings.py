@@ -45,22 +45,32 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.CommonMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware', 
-    'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173", 
     
-    # "https://your-domain.com",
-]
+#     # "https://your-domain.com",
+# ]
+
+CORS_ALLOWED_ORIGINS = os.getenv(
+    "CORS_ALLOWED_ORIGINS", 
+    "http://localhost:5173"
+).split(",")
+
+# ასევე დაამატე CSRF-სთვის (აუცილებელია POST მოთხოვნებისთვის)
+CSRF_TRUSTED_ORIGINS = os.getenv(
+    "CSRF_TRUSTED_ORIGINS", 
+    "http://localhost:5173"
+).split(",")
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
