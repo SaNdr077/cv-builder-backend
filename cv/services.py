@@ -18,10 +18,12 @@
         
 #         browser.close()
 #         return pdf_bytes
-
+import os
 from playwright.sync_api import sync_playwright
 
 def generate_resume_pdf(html_content):
+    os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "/app/pw-browsers"
+    
     with sync_playwright() as p:
         # Railway-ზე (Linux) აუცილებელია --no-sandbox არგუმენტი
         browser = p.chromium.launch(
