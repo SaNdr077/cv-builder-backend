@@ -32,4 +32,4 @@ RUN playwright install chromium
 
 COPY . .
 
-CMD gunicorn cv_builder.wsgi --bind 0.0.0.0:${PORT:-8000} --workers 1
+CMD gunicorn cv_builder.wsgi --bind 0.0.0.0:${PORT:-8000} --workers 1 --log-level debug --capture-output --enable-stdio-inheritance
