@@ -1,13 +1,27 @@
 [variables]
-    # ვეუბნებით Playwright-ს, რომ ბრაუზერები პროექტის შიგნით, კონკრეტულ ადგილას შეინახოს
-    PLAYWRIGHT_BROWSERS_PATH = "/app/pw-browsers"
+PLAYWRIGHT_BROWSERS_PATH = "/app/pw-browsers"
 
 [phases.setup]
-    nixPkgs = ["python311", "playwright-driver", "pango", "cairo", "glib", "nss", "nspr", "atk", "dbus", "libdrm", "mesa", "libxkbcommon"]
+nixPkgs = [
+  "python311",
+  "playwright-driver",
+  "pango",
+  "cairo",
+  "glib",
+  "nss",
+  "nspr",
+  "atk",
+  "dbus",
+  "libdrm",
+  "mesa",
+  "libxkbcommon"
+]
 
 [phases.build]
-    cmds = ["pip install -r requirements.txt"]
+cmds = [
+  "pip install -r requirements.txt",
+  "python -m playwright install chromium"
+]
 
 [start]
-    # აქ ხდება მაგია: სტარტზე ჯერ წაშლის ძველს (თუ რამეა), მერე გადმოწერს სუფთად და მერე ჩართავს სერვერს
-    cmd = "python -m playwright install chromium && python manage.py collectstatic --noinput && gunicorn core.wsgi"
+cmd = "python manage.py collectstatic --noinput && gunicorn core.wsgi"
