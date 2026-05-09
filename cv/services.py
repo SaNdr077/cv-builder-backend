@@ -19,8 +19,32 @@
 #         browser.close()
 #         return pdf_bytes
 
-from weasyprint import HTML
+from playwright.sync_api import sync_playwright
 
 def generate_resume_pdf(html_content):
-    pdf_bytes = HTML(string=html_content).write_pdf()
-    return pdf_bytes
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+            ]
+        )
+        page = browser.new_page()
+        page.set_content(html_content, wait_until="networkidle")
+        content_height = page.evaluate("""
+            () => Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+            )
+        """)
+        pdf_bytes = page.pdf(
+            width="210mm",
+            height=f"{content_height}px",
+            print_background=True,
+            margin={"top": "0", "right": "0", "bottom": "0", "left": "0"}
+        )
+        browser.close()
+        return pdf_bytes
