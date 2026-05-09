@@ -18,6 +18,7 @@ maxminddb==3.1.1
 multidict==6.7.1
 packaging==26.2
 weasyprint==60.0
+pydyf==0.8.0
 propcache==0.4.1
 pyee==13.0.1
 python-dotenv==1.2.2
