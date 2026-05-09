@@ -28,11 +28,7 @@ def generate_resume_pdf(html_content):
         # Railway-ზე (Linux) აუცილებელია --no-sandbox არგუმენტი
         browser = p.chromium.launch(
             headless=True,
-            args=[
-                '--no-sandbox', 
-                '--disable-setuid-sandbox', 
-                '--disable-dev-shm-usage'
-            ]
+            args=["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage"]
         )
         
         page = browser.new_page()
