@@ -128,7 +128,8 @@ logger = logging.getLogger(__name__)
 # PayPal კონფიგურაცია
 PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID')
 PAYPAL_SECRET = os.getenv('PAYPAL_SECRET')
-PAYPAL_BASE_URL = 'https://api-m.sandbox.paypal.com'
+PAYPAL_BASE_URL = 'https://api-m.paypal.com'
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
