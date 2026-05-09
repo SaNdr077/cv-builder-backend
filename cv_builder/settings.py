@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w^+q)wit8e$5+or^q*x^^@#lz+c+cne$jr7+s5-ze$==m4e^t&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cvgener.com', 'www.cvgener.com', 'cv-builder-backend-production-eb89.up.railway.app']
 
 
 # Application definition
@@ -56,11 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173", 
-    
-#     # "https://your-domain.com",
-# ]
+
 
 CORS_ALLOWED_ORIGINS = os.getenv(
     "CORS_ALLOWED_ORIGINS", 
