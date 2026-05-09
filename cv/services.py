@@ -18,7 +18,7 @@
         
 #         browser.close()
 #         return pdf_bytes
-import os
+
 from playwright.sync_api import sync_playwright
 
 def generate_resume_pdf(html_content):
