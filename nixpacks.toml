@@ -1,11 +1,12 @@
 [phases.setup]
-nixPkgs = ["python311", "nodejs"]
+nixPkgs = ["chromium", "nss", "atk", "cups", "dbus", "libdrm", "libxkbcommon", "mesa"]
 
 [phases.install]
 cmds = [
   "pip install -r requirements.txt",
-  "python -m playwright install chromium"
+  "playwright install chromium"
 ]
 
 [start]
-cmd = "python manage.py collectstatic --noinput && gunicorn core.wsgi"
+cmd = "gunicorn cv_builder.wsgi"
+
