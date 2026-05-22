@@ -12,9 +12,7 @@ from django.utils import timezone
 from .models import Device
 from .services import generate_resume_pdf
 from dotenv import load_dotenv
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.renderers import StaticHTMLRenderer
-from django.http import HttpResponse
+
 
 load_dotenv()
 
@@ -132,18 +130,31 @@ class VerifyPayPalPayment(APIView):
         
 # ----------------------
 
-# კლასის ნაცვლად ვაკეთებთ ჩვეულებრივ ფუნქციას:
-@api_view(['GET']) # ვეუბნებით DRF-ს, რომ ეს არის მხოლოდ GET მოთხოვნა
-@renderer_classes([StaticHTMLRenderer]) # ვაიძულებთ, რომ დააბრუნოს სუფთა, დაუმუშავებელი კონტენტი
 def sitemap_view(request):
     slugs = [
         "professional-cv-2026", "ats-friendly-cv", "common-cv-mistakes",
-        # ... ყველა თქვენი სლაგები უცვლელად ...
+        "linkedin-profile-optimization", "career-change-resume-tips",
+        "action-verbs-for-resume", "how-to-talk-about-salary-in-interview",
+        "remote-work-cv-requirements", "ats-resume-scanner-secrets",
+        "body-language-in-video-interviews", "portfolio-importance-for-developers",
+        "overcoming-gap-in-resume", "soft-skills-that-employers-value",
+        "ai-tools-for-career-growth", "linkedin-profile-optimization-tips",
+        "salary-negotiation-strategies", "remote-work-productivity-hacks",
+        "cv-writing-for-non-tech-professions", "what-is-ats-resume-and-how-to-pass-it",
+        "europass-vs-modern-cv-templates", "how-to-write-first-it-resume-without-experience",
+        "how-to-choose-the-right-cv-design-template", "how-to-prepare-for-it-interview-2026",
+        "importance-of-action-verbs-in-resume-building", "remote-work-job-search-strategy-2026",
+        "how-to-write-resume-with-no-experience", "soft-skills-vs-hard-skills-in-cv",
+        "how-to-write-ats-friendly-resume", "portfolio-vs-resume-for-creatives-and-developers",
     ]
 
     langs = [
-        ("x-default", ""), ("ka", ""), ("en", "/en"),
-        ("de", "/de"), ("fr", "/fr"), ("ru", "/ru"),
+        ("x-default", ""), 
+        ("ka", ""), 
+        ("en", "/en"),
+        ("de", "/de"), 
+        ("fr", "/fr"), 
+        ("ru", "/ru"),
     ]
 
     BASE = "https://cvgener.com"
@@ -155,21 +166,37 @@ def sitemap_view(request):
         for lang_code, prefix in langs:
             alternates += f'<xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}{path}"/>'
         
-        urls.append(f'<url><loc>{BASE}{path}</loc>{alternates}<changefreq>weekly</changefreq><priority>1.0</priority></url>')
+        urls.append(
+            f'<url>'
+            f'<loc>{BASE}{path}</loc>'
+            f'{alternates}'
+            f'<changefreq>weekly</changefreq>'
+            f'<priority>1.0</priority>'
+            f'</url>'
+        )
 
-    # ბლოგ პოსტები
+    # ბლოგის პოსტები
     for slug in slugs:
         alternates = ""
         for lang_code, prefix in langs:
             alternates += f'<xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}/blog/{slug}"/>'
 
-        urls.append(f'<url><loc>{BASE}/blog/{slug}</loc>{alternates}<changefreq>monthly</changefreq><priority>0.8</priority></url>')
+        urls.append(
+            f'<url>'
+            f'<loc>{BASE}/blog/{slug}</loc>'
+            f'{alternates}'
+            f'<changefreq>monthly</changefreq>'
+            f'<priority>0.8</priority>'
+            f'</url>'
+        )
 
-    # აკურატულად შევაერთოთ ყველაფერი ერთ სტრინგად, ყოველგვარი ზედმეტი \n-ების გარეშე დასაწყისში
-    xml_content = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' + "".join(urls) + '</urlset>'
+    # სრული XML სტრუქტურის აწყობა
+    xml_content = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        f'{"\n".join(urls)}\n'
+        '</urlset>'
+    )
 
-    # მკაცრად განვსაზღვროთ content_type
-    response = HttpResponse(xml_content.strip(), content_type="application/xml")
-    # დავამატოთ ჰედერი ხელით, რომ ბრაუზერმა შანსი არ დაიტოვოს ტექსტად წასაკითხად
-    response["Content-Type"] = "application/xml; charset=utf-8"
-    return response
+    return HttpResponse(xml_content.strip(), content_type="application/xml; charset=utf-8")
