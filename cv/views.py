@@ -129,71 +129,66 @@ class VerifyPayPalPayment(APIView):
         
 # ----------------------
 
-class SitemapView(APIView):
-    def get(self, request):
-        slugs = [
-            "professional-cv-2026", "ats-friendly-cv", "common-cv-mistakes",
-            "linkedin-profile-optimization", "career-change-resume-tips",
-            "action-verbs-for-resume", "how-to-talk-about-salary-in-interview",
-            "remote-work-cv-requirements", "ats-resume-scanner-secrets",
-            "body-language-in-video-interviews", "portfolio-importance-for-developers",
-            "overcoming-gap-in-resume", "soft-skills-that-employers-value",
-            "ai-tools-for-career-growth", "linkedin-profile-optimization-tips",
-            "salary-negotiation-strategies", "remote-work-productivity-hacks",
-            "cv-writing-for-non-tech-professions", "what-is-ats-resume-and-how-to-pass-it",
-            "europass-vs-modern-cv-templates", "how-to-write-first-it-resume-without-experience",
-            "how-to-choose-the-right-cv-design-template", "how-to-prepare-for-it-interview-2026",
-            "importance-of-action-verbs-in-resume-building", "remote-work-job-search-strategy-2026",
-            "how-to-write-resume-with-no-experience", "soft-skills-vs-hard-skills-in-cv",
-            "how-to-write-ats-friendly-resume", "portfolio-vs-resume-for-creatives-and-developers",
-        ]
+# კლასის ნაცვლად ვაკეთებთ ჩვეულებრივ ფუნქციას:
+def sitemap_view(request):
+    slugs = [
+        "professional-cv-2026", "ats-friendly-cv", "common-cv-mistakes",
+        "linkedin-profile-optimization", "career-change-resume-tips",
+        "action-verbs-for-resume", "how-to-talk-about-salary-in-interview",
+        "remote-work-cv-requirements", "ats-resume-scanner-secrets",
+        "body-language-in-video-interviews", "portfolio-importance-for-developers",
+        "overcoming-gap-in-resume", "soft-skills-that-employers-value",
+        "ai-tools-for-career-growth", "linkedin-profile-optimization-tips",
+        "salary-negotiation-strategies", "remote-work-productivity-hacks",
+        "cv-writing-for-non-tech-professions", "what-is-ats-resume-and-how-to-pass-it",
+        "europass-vs-modern-cv-templates", "how-to-write-first-it-resume-without-experience",
+        "how-to-choose-the-right-cv-design-template", "how-to-prepare-for-it-interview-2026",
+        "importance-of-action-verbs-in-resume-building", "remote-work-job-search-strategy-2026",
+        "how-to-write-resume-with-no-experience", "soft-skills-vs-hard-skills-in-cv",
+        "how-to-write-ats-friendly-resume", "portfolio-vs-resume-for-creatives-and-developers",
+    ]
 
-        langs = [
-            ("x-default", ""),   # default = ka (მთავარი)
-            ("ka", ""),
-            ("en", "/en"),
-            ("de", "/de"),
-            ("fr", "/fr"),
-            ("ru", "/ru"),
-        ]
+    langs = [
+        ("x-default", ""),   # default = ka (მთავარი)
+        ("ka", ""),
+        ("en", "/en"),
+        ("de", "/de"),
+        ("fr", "/fr"),
+        ("ru", "/ru"),
+    ]
 
-        BASE = "https://cvgener.com"
-        urls = []
+    BASE = "https://cvgener.com"
+    urls = []
 
-        # სტატიკური გვერდები hreflang-ით
-        for path in ["/", "/about", "/contact", "/blog"]:
-            alternates = ""
-            for lang_code, prefix in langs:
-                alternates += f"""
-    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}{path}"/>"""
-            
-            # canonical = default (ka, prefix="")
-            urls.append(f"""
-  <url>
+    # სტატიკური გვერდები hreflang-ით
+    for path in ["/", "/about", "/contact", "/blog"]:
+        alternates = ""
+        for lang_code, prefix in langs:
+            alternates += f"""\n    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}{path}"/>"""
+        
+        urls.append(f"""  <url>
     <loc>{BASE}{path}</loc>{alternates}
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>""")
 
-        # ბლოგ პოსტები hreflang-ით
-        for slug in slugs:
-            alternates = ""
-            for lang_code, prefix in langs:
-                alternates += f"""
-    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}/blog/{slug}"/>"""
+    # ბლოგ პოსტები hreflang-ით
+    for slug in slugs:
+        alternates = ""
+        for lang_code, prefix in langs:
+            alternates += f"""\n    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}/blog/{slug}"/>"""
 
-            # canonical = default (ka, prefix="")
-            urls.append(f"""
-  <url>
+        urls.append(f"""  <url>
     <loc>{BASE}/blog/{slug}</loc>{alternates}
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>""")
 
-        xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+    # მოვაშოროთ ზედმეტი ტექსტური გამოტოვებები დაშორებებში (სტრინგების შეერთებისას)
+    xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-{"".join(urls)}
+{"\n".join(urls)}
 </urlset>"""
 
-        return HttpResponse(xml, content_type="application/xml")
+    return HttpResponse(xml_content, content_type="application/xml")
