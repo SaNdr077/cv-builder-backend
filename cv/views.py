@@ -131,72 +131,373 @@ class VerifyPayPalPayment(APIView):
 # ----------------------
 
 def sitemap_view(request):
-    slugs = [
-        "professional-cv-2026", "ats-friendly-cv", "common-cv-mistakes",
-        "linkedin-profile-optimization", "career-change-resume-tips",
-        "action-verbs-for-resume", "how-to-talk-about-salary-in-interview",
-        "remote-work-cv-requirements", "ats-resume-scanner-secrets",
-        "body-language-in-video-interviews", "portfolio-importance-for-developers",
-        "overcoming-gap-in-resume", "soft-skills-that-employers-value",
-        "ai-tools-for-career-growth", "linkedin-profile-optimization-tips",
-        "salary-negotiation-strategies", "remote-work-productivity-hacks",
-        "cv-writing-for-non-tech-professions", "what-is-ats-resume-and-how-to-pass-it",
-        "europass-vs-modern-cv-templates", "how-to-write-first-it-resume-without-experience",
-        "how-to-choose-the-right-cv-design-template", "how-to-prepare-for-it-interview-2026",
-        "importance-of-action-verbs-in-resume-building", "remote-work-job-search-strategy-2026",
-        "how-to-write-resume-with-no-experience", "soft-skills-vs-hard-skills-in-cv",
-        "how-to-write-ats-friendly-resume", "portfolio-vs-resume-for-creatives-and-developers",
-    ]
+    # სრული, მყარი XML კოდი ყოველგვარი დინამიური აწყობის გარეშე
+    raw_xml = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://cvgener.com/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/about"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/about"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/contact"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/professional-cv-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/professional-cv-2026"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/ats-friendly-cv</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/ats-friendly-cv"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/common-cv-mistakes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/common-cv-mistakes"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/linkedin-profile-optimization</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/linkedin-profile-optimization"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/career-change-resume-tips</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/career-change-resume-tips"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/action-verbs-for-resume</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/action-verbs-for-resume"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-talk-about-salary-in-interview</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-talk-about-salary-in-interview"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/remote-work-cv-requirements</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/remote-work-cv-requirements"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/ats-resume-scanner-secrets</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/ats-resume-scanner-secrets"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/body-language-in-video-interviews</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/body-language-in-video-interviews"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/portfolio-importance-for-developers</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/portfolio-importance-for-developers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/overcoming-gap-in-resume</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/overcoming-gap-in-resume"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/soft-skills-that-employers-value</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/soft-skills-that-employers-value"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/ai-tools-for-career-growth</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/ai-tools-for-career-growth"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/linkedin-profile-optimization-tips</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/linkedin-profile-optimization-tips"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/salary-negotiation-strategies</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/salary-negotiation-strategies"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/remote-work-productivity-hacks</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/remote-work-productivity-hacks"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/cv-writing-for-non-tech-professions</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/cv-writing-for-non-tech-professions"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/europass-vs-modern-cv-templates</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/europass-vs-modern-cv-templates"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-write-first-it-resume-without-experience</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-write-first-it-resume-without-experience"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-choose-the-right-cv-design-template</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-choose-the-right-cv-design-template"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-prepare-for-it-interview-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-prepare-for-it-interview-2026"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/importance-of-action-verbs-in-resume-building</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/importance-of-action-verbs-in-resume-building"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/remote-work-job-search-strategy-2026</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/remote-work-job-search-strategy-2026"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-write-resume-with-no-experience</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-write-resume-with-no-experience"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/soft-skills-hard-skills-in-cv"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/how-to-write-ats-friendly-resume</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/how-to-write-ats-friendly-resume"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cvgener.com/fr/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://cvgener.com/ru/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>"""
 
-    langs = [
-        ("x-default", ""), 
-        ("ka", ""), 
-        ("en", "/en"),
-        ("de", "/de"), 
-        ("fr", "/fr"), 
-        ("ru", "/ru"),
-    ]
-
-    BASE = "https://cvgener.com"
-    urls = []
-
-    # სტატიკური გვერდები
-    for path in ["/", "/about", "/contact", "/blog"]:
-        alternates = ""
-        for lang_code, prefix in langs:
-            alternates += f'<xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}{path}"/>'
-        
-        urls.append(
-            f'<url>'
-            f'<loc>{BASE}{path}</loc>'
-            f'{alternates}'
-            f'<changefreq>weekly</changefreq>'
-            f'<priority>1.0</priority>'
-            f'</url>'
-        )
-
-    # ბლოგის პოსტები
-    for slug in slugs:
-        alternates = ""
-        for lang_code, prefix in langs:
-            alternates += f'<xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}/blog/{slug}"/>'
-
-        urls.append(
-            f'<url>'
-            f'<loc>{BASE}/blog/{slug}</loc>'
-            f'{alternates}'
-            f'<changefreq>monthly</changefreq>'
-            f'<priority>0.8</priority>'
-            f'</url>'
-        )
-
-    # სრული XML სტრუქტურის აწყობა
-    xml_content = (
-        '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
-        'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
-        f'{"\n".join(urls)}\n'
-        '</urlset>'
-    )
-
-    return HttpResponse(xml_content.strip(), content_type="application/xml; charset=utf-8")
+    response = HttpResponse(raw_xml.strip(), content_type="application/xml; charset=utf-8")
+    return response
