@@ -130,13 +130,15 @@ class VerifyPayPalPayment(APIView):
         
 # ----------------------
 
+
 def sitemap_view(request):
-    # სრული, მყარი XML კოდი ყოველგვარი დინამიური აწყობის გარეშე
+    # ჩასწორებული XML, სადაც x-default უთითებს ინგლისურ ვერსიებზე (/en)
     raw_xml = """<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://cdnjs.cloudflare.com/ajax/libs/sitemap-blueprint/1.0.0/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cvgener.com/</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/"/>
@@ -147,7 +149,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/about</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/about"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/about"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/about"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/about"/>
@@ -158,7 +160,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/contact</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/contact"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/contact"/>
@@ -169,7 +171,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog"/>
@@ -180,7 +182,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/professional-cv-2026</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/professional-cv-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/professional-cv-2026"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/professional-cv-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/professional-cv-2026"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/professional-cv-2026"/>
@@ -191,7 +193,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/ats-friendly-cv</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ats-friendly-cv"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/ats-friendly-cv"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ats-friendly-cv"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ats-friendly-cv"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ats-friendly-cv"/>
@@ -202,7 +204,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/common-cv-mistakes</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/common-cv-mistakes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/common-cv-mistakes"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/common-cv-mistakes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/common-cv-mistakes"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/common-cv-mistakes"/>
@@ -213,7 +215,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/linkedin-profile-optimization</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/linkedin-profile-optimization"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/linkedin-profile-optimization"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/linkedin-profile-optimization"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/linkedin-profile-optimization"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/linkedin-profile-optimization"/>
@@ -224,7 +226,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/career-change-resume-tips</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/career-change-resume-tips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/career-change-resume-tips"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/career-change-resume-tips"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/career-change-resume-tips"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/career-change-resume-tips"/>
@@ -235,7 +237,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/action-verbs-for-resume</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/action-verbs-for-resume"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/action-verbs-for-resume"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/action-verbs-for-resume"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/action-verbs-for-resume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/action-verbs-for-resume"/>
@@ -246,7 +248,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-talk-about-salary-in-interview</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-talk-about-salary-in-interview"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-talk-about-salary-in-interview"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-talk-about-salary-in-interview"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-talk-about-salary-in-interview"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-talk-about-salary-in-interview"/>
@@ -257,7 +259,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/remote-work-cv-requirements</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-cv-requirements"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/remote-work-cv-requirements"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-cv-requirements"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-cv-requirements"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-cv-requirements"/>
@@ -268,7 +270,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/ats-resume-scanner-secrets</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ats-resume-scanner-secrets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/ats-resume-scanner-secrets"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ats-resume-scanner-secrets"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ats-resume-scanner-secrets"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ats-resume-scanner-secrets"/>
@@ -279,7 +281,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/body-language-in-video-interviews</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/body-language-in-video-interviews"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/body-language-in-video-interviews"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/body-language-in-video-interviews"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/body-language-in-video-interviews"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/body-language-in-video-interviews"/>
@@ -290,7 +292,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/portfolio-importance-for-developers</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/portfolio-importance-for-developers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/portfolio-importance-for-developers"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/portfolio-importance-for-developers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/portfolio-importance-for-developers"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/portfolio-importance-for-developers"/>
@@ -301,7 +303,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/overcoming-gap-in-resume</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/overcoming-gap-in-resume"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/overcoming-gap-in-resume"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/overcoming-gap-in-resume"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/overcoming-gap-in-resume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/overcoming-gap-in-resume"/>
@@ -312,7 +314,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/soft-skills-that-employers-value</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/soft-skills-that-employers-value"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/soft-skills-that-employers-value"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/soft-skills-that-employers-value"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/soft-skills-that-employers-value"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/soft-skills-that-employers-value"/>
@@ -323,7 +325,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/ai-tools-for-career-growth</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/ai-tools-for-career-growth"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/ai-tools-for-career-growth"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/ai-tools-for-career-growth"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/ai-tools-for-career-growth"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/ai-tools-for-career-growth"/>
@@ -334,7 +336,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/linkedin-profile-optimization-tips</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/linkedin-profile-optimization-tips"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/linkedin-profile-optimization-tips"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/linkedin-profile-optimization-tips"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/linkedin-profile-optimization-tips"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/linkedin-profile-optimization-tips"/>
@@ -345,7 +347,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/salary-negotiation-strategies</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/salary-negotiation-strategies"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/salary-negotiation-strategies"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/salary-negotiation-strategies"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/salary-negotiation-strategies"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/salary-negotiation-strategies"/>
@@ -356,7 +358,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/remote-work-productivity-hacks</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-productivity-hacks"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/remote-work-productivity-hacks"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-productivity-hacks"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-productivity-hacks"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-productivity-hacks"/>
@@ -367,7 +369,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/cv-writing-for-non-tech-professions</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/cv-writing-for-non-tech-professions"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/cv-writing-for-non-tech-professions"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/cv-writing-for-non-tech-professions"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/cv-writing-for-non-tech-professions"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/cv-writing-for-non-tech-professions"/>
@@ -378,7 +380,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/what-is-ats-resume-and-how-to-pass-it"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/what-is-ats-resume-and-how-to-pass-it"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/what-is-ats-resume-and-how-to-pass-it"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/what-is-ats-resume-and-how-to-pass-it"/>
@@ -389,7 +391,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/europass-vs-modern-cv-templates</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/europass-vs-modern-cv-templates"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/europass-vs-modern-cv-templates"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/europass-vs-modern-cv-templates"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/europass-vs-modern-cv-templates"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/europass-vs-modern-cv-templates"/>
@@ -400,7 +402,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-write-first-it-resume-without-experience</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-first-it-resume-without-experience"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-write-first-it-resume-without-experience"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-first-it-resume-without-experience"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-first-it-resume-without-experience"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-first-it-resume-without-experience"/>
@@ -411,7 +413,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-choose-the-right-cv-design-template</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-choose-the-right-cv-design-template"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-choose-the-right-cv-design-template"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-choose-the-right-cv-design-template"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-choose-the-right-cv-design-template"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-choose-the-right-cv-design-template"/>
@@ -422,7 +424,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-prepare-for-it-interview-2026</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-prepare-for-it-interview-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-prepare-for-it-interview-2026"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-prepare-for-it-interview-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-prepare-for-it-interview-2026"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-prepare-for-it-interview-2026"/>
@@ -433,7 +435,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/importance-of-action-verbs-in-resume-building</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/importance-of-action-verbs-in-resume-building"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/importance-of-action-verbs-in-resume-building"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/importance-of-action-verbs-in-resume-building"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/importance-of-action-verbs-in-resume-building"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/importance-of-action-verbs-in-resume-building"/>
@@ -444,7 +446,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/remote-work-job-search-strategy-2026</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/remote-work-job-search-strategy-2026"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/remote-work-job-search-strategy-2026"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/remote-work-job-search-strategy-2026"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/remote-work-job-search-strategy-2026"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/remote-work-job-search-strategy-2026"/>
@@ -455,7 +457,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-write-resume-with-no-experience</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-resume-with-no-experience"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-write-resume-with-no-experience"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-resume-with-no-experience"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-resume-with-no-experience"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-resume-with-no-experience"/>
@@ -466,7 +468,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/soft-skills-vs-hard-skills-in-cv"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/soft-skills-vs-hard-skills-in-cv"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/soft-skills-vs-hard-skills-in-cv"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/soft-skills-vs-hard-skills-in-cv"/>
@@ -477,7 +479,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/how-to-write-ats-friendly-resume</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/how-to-write-ats-friendly-resume"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/how-to-write-ats-friendly-resume"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/how-to-write-ats-friendly-resume"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/how-to-write-ats-friendly-resume"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/how-to-write-ats-friendly-resume"/>
@@ -488,7 +490,7 @@ def sitemap_view(request):
   </url>
   <url>
     <loc>https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers</loc>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cvgener.com/en/blog/portfolio-vs-resume-for-creatives-and-developers"/>
     <xhtml:link rel="alternate" hreflang="ka" href="https://cvgener.com/blog/portfolio-vs-resume-for-creatives-and-developers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://cvgener.com/en/blog/portfolio-vs-resume-for-creatives-and-developers"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://cvgener.com/de/blog/portfolio-vs-resume-for-creatives-and-developers"/>
