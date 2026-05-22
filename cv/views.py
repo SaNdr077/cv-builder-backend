@@ -133,10 +133,9 @@ class VerifyPayPalPayment(APIView):
 
 
 
+
 def sitemap_view(request):
-    # თავშივე ვამატებთ სტილის ხაზს, რომ ბრაუზერმა ადამიანურად დახატოს
     raw_xml = """<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://cdnjs.cloudflare.com/ajax/libs/sitemap-blueprint/1.0.0/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cvgener.com/</loc>
