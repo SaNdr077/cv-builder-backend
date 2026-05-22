@@ -149,6 +149,7 @@ class SitemapView(APIView):
         ]
 
         langs = [
+            ("x-default", ""),   # default = ka (მთავარი)
             ("ka", ""),
             ("en", "/en"),
             ("de", "/de"),
@@ -156,29 +157,42 @@ class SitemapView(APIView):
             ("ru", "/ru"),
         ]
 
+        BASE = "https://cvgener.com"
         urls = []
 
-        # სტატიკური გვერდები
-        for path in ["/", "/blog", "/about", "/contact"]:
+        # სტატიკური გვერდები hreflang-ით
+        for path in ["/", "/about", "/contact", "/blog"]:
+            alternates = ""
+            for lang_code, prefix in langs:
+                alternates += f"""
+    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}{path}"/>"""
+            
+            # canonical = default (ka, prefix="")
             urls.append(f"""
   <url>
-    <loc>https://cvgener.com{path}</loc>
+    <loc>{BASE}{path}</loc>{alternates}
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>""")
 
-        # ბლოგ პოსტები ყველა ენაზე
+        # ბლოგ პოსტები hreflang-ით
         for slug in slugs:
+            alternates = ""
             for lang_code, prefix in langs:
-                urls.append(f"""
+                alternates += f"""
+    <xhtml:link rel="alternate" hreflang="{lang_code}" href="{BASE}{prefix}/blog/{slug}"/>"""
+
+            # canonical = default (ka, prefix="")
+            urls.append(f"""
   <url>
-    <loc>https://cvgener.com{prefix}/blog/{slug}</loc>
+    <loc>{BASE}/blog/{slug}</loc>{alternates}
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>""")
 
         xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {"".join(urls)}
 </urlset>"""
 
