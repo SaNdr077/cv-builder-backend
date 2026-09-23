@@ -6,6 +6,7 @@ from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.throttling import ScopedRateThrottle
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import Device
@@ -21,6 +22,41 @@ logger = logging.getLogger(__name__)
 PAYPAL_CLIENT_ID = os.getenv('PAYPAL_CLIENT_ID')
 PAYPAL_SECRET = os.getenv('PAYPAL_SECRET')
 PAYPAL_BASE_URL = 'https://api-m.paypal.com'
+
+# SECURITY FIX (2026-09): Gemini API key ადრე frontend-ში (VITE_GEMINI_KEY)
+# იყო ჩაშენებული და ყველასთვის ხილული production JS ბანდლში (DevTools ->
+# Network -> request URL-ში key ღია ტექსტად ჩანდა). ამის გამო ნებისმიერს
+# შეეძლო key-ის ამოღება და შენი quota-ს პირდაპირ, შენი საიტის გვერდის
+# ავლით ამოწურვა. ახლა key მხოლოდ აქ, სერვერზეა და browser-ს არასდროს
+# გადაეცემა.
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+GEMINI_MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
+
+# იგივე prompt-ები, რაც ადრე frontend-ში (Form.jsx/CVChatAssistant.jsx)
+# იყო ჩაშენებული — ერთადერთ, საერთო ადგილას გადმოტანილია.
+IMPROVE_PROMPTS = {
+    "about": {
+        "ka": "გადააკეთე ეს CV პროფილის ტექსტი პროფესიონალურად და ბუნებრივად. ტექსტი უნდა ჟღერდეს როგორც რეალური დეველოპერის მიერ დაწერილი. გამოიყენე 3-4 მოკლე და შთამბეჭდავი წინადადება. ფოკუსირდი ტექნიკურ უნარებზე, გამოცდილებაზე და პრაქტიკულ ღირებულებაზე. მოერიდე ზედმეტ აკადემიურ და ბუნდოვან ფრაზებს. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
+        "en": "Rewrite this CV profile summary in a professional and natural tone. Make it sound human-written, not AI-generated. Keep it to 3-4 concise and impactful sentences. Focus on technical expertise, practical experience, and value. Avoid vague corporate buzzwords or overly academic language. Return ONLY the final text:\n\n",
+        "ru": "Перепиши этот текст профиля для CV профессионально и естественно. Текст должен звучать как написанный реальным разработчиком, а не ИИ. Используй 3-4 коротких и сильных предложения. Сделай акцент на технических навыках, опыте и практической ценности. Избегай расплывчатых корпоративных фраз. Верни ТОЛЬКО итоговый текст:\n\n",
+        "de": "Schreibe diese Profilbeschreibung für einen Lebenslauf professionell und natürlich um. Der Text soll menschlich und nicht KI-generiert wirken. Verwende 3-4 kurze und aussagekräftige Sätze. Konzentriere dich auf technische Fähigkeiten, Erfahrung und praktischen Mehrwert. Vermeide vage Business-Floskeln. Gib NUR den finalen Text zurück:\n\n",
+        "fr": "Réécris ce résumé de profil CV de manière professionnelle et naturelle. Le texte doit sembler rédigé par un vrai développeur et non par une IA. Utilise 3 à 4 phrases courtes et percutantes. Mets l'accent sur les compétences techniques, l'expérience et la valeur pratique. Évite les formulations vagues et trop corporatives. Retourne UNIQUEMENT le texte final :\n\n",
+    },
+    "experience": {
+        "ka": "გადააკეთე ეს სამუშაო გამოცდილების აღწერა პროფესიონალურ ჭრილში. აქციე ის მოკლე, ეფექტურ პუნქტებად ან ტექსტად, სადაც ჩანს მიღწევები და ტექნოლოგიები. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
+        "en": "Rewrite this job experience description professionally. Focus on achievements, responsibilities, and technologies used. Return ONLY the final text:\n\n",
+        "ru": "Перепиши это описание опыта работы профессионально. Сделай акцент на достижениях и используемых технологиях. Верни ТОЛЬКО итоговый текст:\n\n",
+        "de": "Schreibe diese Berufserfahrung professionell um. Konzentriere dich auf Erfolge und eingesetzte Technologien. Gib NUR den finalen Text zurück:\n\n",
+        "fr": "Réécris cette description d'expérience professionnelle de manière formelle. Mets en valeur les réalisations et les technologies utilisées. Retourne UNIQUEMENT le texte final :\n\n",
+    },
+    "coverLetter": {
+        "ka": "გადააკეთე ეს სამოტივაციო წერილი პროფესიონალურ, თბილ და დამაჯერებელ ტონში. ტექსტი უნდა ჟღერდეს როგორც რეალური ადამიანის მიერ დაწერილი, არა შაბლონურად. შეინარჩუნე ორიგინალის კონკრეტული ფაქტები (თანამდებობა, კომპანია, უნარები), უბრალოდ გააუმჯობესე ჩამოყალიბება და სტრუქტურა. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
+        "en": "Rewrite this cover letter in a professional, warm, and persuasive tone. It should sound genuinely human-written, not generic or templated. Keep the original's specific facts (role, company, skills) but improve the phrasing and structure. Return ONLY the final text:\n\n",
+        "ru": "Перепиши это сопроводительное письмо в профессиональном, тёплом и убедительном тоне. Текст должен звучать искренне, не шаблонно. Сохрани конкретные факты оригинала (должность, компания, навыки), но улучши формулировки и структуру. Верни ТОЛЬКО итоговый текст:\n\n",
+        "de": "Schreibe dieses Anschreiben in einem professionellen, warmen und überzeugenden Ton um. Es soll authentisch klingen, nicht generisch. Behalte die konkreten Fakten des Originals (Position, Unternehmen, Fähigkeiten) bei, verbessere aber Formulierung und Struktur. Gib NUR den finalen Text zurück:\n\n",
+        "fr": "Réécris cette lettre de motivation dans un ton professionnel, chaleureux et convaincant. Le texte doit sembler authentique, pas générique. Conserve les faits concrets de l'original (poste, entreprise, compétences) mais améliore la formulation et la structure. Retourne UNIQUEMENT le texte final :\n\n",
+    },
+}
 
 
 def get_client_ip(request):
@@ -126,7 +162,76 @@ class VerifyPayPalPayment(APIView):
             return Response({"error": "გადახდა ვერ დადასტურდა", "details": capture_data}, status=400)
         except Exception as e:
             return Response({"error": f"Payment Verification Error: {str(e)}"}, status=500)
-        
+
+
+class ImproveTextThrottle(ScopedRateThrottle):
+    """
+    SECURITY FIX (2026-09): ცალკე throttle-სქოუფი ამ endpoint-ისთვის,
+    რომ ერთმა IP-მ/კლიენტმა ვერ დაწვას მთელი Gemini quota. მაჩვენებელი
+    კონფიგურირებადია settings.py-ის REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"]
+    ["ai_improve"]-ში.
+    """
+    scope = 'ai_improve'
+
+
+class ImproveTextView(APIView):
+    """
+    SECURITY FIX (2026-09): Gemini API-ს გამოძახება, რომელიც ადრე
+    პირდაპირ frontend-იდან ხდებოდა (Form.jsx/CVChatAssistant.jsx),
+    გადმოტანილია აქ. GEMINI_API_KEY browser-ს არასდროს ეგზავნება —
+    მხოლოდ ამ სერვერიდან გადის Google-სთან.
+    """
+    throttle_classes = [ImproveTextThrottle]
+    throttle_scope = 'ai_improve'
+
+    def post(self, request):
+        text = (request.data.get('text') or '').strip()
+        field_type = request.data.get('field_type', 'about')
+        lang = request.data.get('lang', 'ka')
+
+        if not text:
+            return Response({"error": "Text is required"}, status=400)
+
+        if not GEMINI_API_KEY:
+            logger.error("GEMINI_API_KEY is not configured on the server")
+            return Response({"error": "AI service is not configured"}, status=500)
+
+        prompts_for_type = IMPROVE_PROMPTS.get(field_type, IMPROVE_PROMPTS["about"])
+        prompt_prefix = prompts_for_type.get(lang) or prompts_for_type.get("en")
+        full_prompt = prompt_prefix + text
+
+        try:
+            gemini_response = requests.post(
+                GEMINI_MODEL_URL,
+                params={"key": GEMINI_API_KEY},
+                json={"contents": [{"parts": [{"text": full_prompt}]}]},
+                timeout=30,
+            )
+            data = gemini_response.json()
+
+            if gemini_response.status_code != 200:
+                logger.error(f"Gemini API error ({gemini_response.status_code}): {data}")
+                error_message = data.get("error", {}).get("message", "AI service error")
+                # 429/503 გადავცემთ ისე, როგორც Gemini-მ დააბრუნა (rate-limit/overload),
+                # დანარჩენს 502-ად (bad gateway ჩვენს ბექენდსა და Google-ს შორის)
+                forward_status = gemini_response.status_code if gemini_response.status_code in (429, 503) else 502
+                return Response({"error": error_message}, status=forward_status)
+
+            candidates = data.get("candidates", [])
+            result_text = ""
+            if candidates:
+                parts = candidates[0].get("content", {}).get("parts", [])
+                result_text = "".join(p.get("text", "") for p in parts)
+
+            if not result_text:
+                return Response({"error": "Empty AI response"}, status=502)
+
+            return Response({"result": result_text.strip()})
+
+        except requests.RequestException as e:
+            logger.exception("Gemini request failed")
+            return Response({"error": str(e)}, status=502)
+
 # ----------------------
 
 

@@ -61,6 +61,11 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '100/day',
+        # SECURITY FIX (2026-09): ცალკე, უფრო მკაცრი ლიმიტი AI-გაუმჯობესების
+        # endpoint-ისთვის (views.ImproveTextView) — Gemini-ს quota ამ
+        # კონკრეტულ endpoint-ზეა დამოკიდებული, ამიტომ ზოგად 'anon'-ს
+        # (100/day) არ ვანდობთ მარტო.  საჭიროებისამებრ დაარეგულირე.
+        'ai_improve': '15/day',
     }
 }
 
