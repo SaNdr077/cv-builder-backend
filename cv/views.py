@@ -30,7 +30,7 @@ PAYPAL_BASE_URL = 'https://api-m.paypal.com'
 # ავლით ამოწურვა. ახლა key მხოლოდ აქ, სერვერზეა და browser-ს არასდროს
 # გადაეცემა.
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-GEMINI_MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent"
+GEMINI_MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent"
 
 # იგივე prompt-ები, რაც ადრე frontend-ში (Form.jsx/CVChatAssistant.jsx)
 # იყო ჩაშენებული — ერთადერთ, საერთო ადგილას გადმოტანილია.
