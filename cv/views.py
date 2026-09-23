@@ -35,28 +35,29 @@ GEMINI_MODEL_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemi
 # იგივე prompt-ები, რაც ადრე frontend-ში (Form.jsx/CVChatAssistant.jsx)
 # იყო ჩაშენებული — ერთადერთ, საერთო ადგილას გადმოტანილია.
 IMPROVE_PROMPTS = {
-    "about": {
-        "ka": "გადააკეთე ეს CV პროფილის ტექსტი პროფესიონალურად და ბუნებრივად. ტექსტი უნდა ჟღერდეს როგორც რეალური დეველოპერის მიერ დაწერილი. გამოიყენე 3-4 მოკლე და შთამბეჭდავი წინადადება. ფოკუსირდი ტექნიკურ უნარებზე, გამოცდილებაზე და პრაქტიკულ ღირებულებაზე. მოერიდე ზედმეტ აკადემიურ და ბუნდოვან ფრაზებს. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
-        "en": "Rewrite this CV profile summary in a professional and natural tone. Make it sound human-written, not AI-generated. Keep it to 3-4 concise and impactful sentences. Focus on technical expertise, practical experience, and value. Avoid vague corporate buzzwords or overly academic language. Return ONLY the final text:\n\n",
-        "ru": "Перепиши этот текст профиля для CV профессионально и естественно. Текст должен звучать как написанный реальным разработчиком, а не ИИ. Используй 3-4 коротких и сильных предложения. Сделай акцент на технических навыках, опыте и практической ценности. Избегай расплывчатых корпоративных фраз. Верни ТОЛЬКО итоговый текст:\n\n",
-        "de": "Schreibe diese Profilbeschreibung für einen Lebenslauf professionell und natürlich um. Der Text soll menschlich und nicht KI-generiert wirken. Verwende 3-4 kurze und aussagekräftige Sätze. Konzentriere dich auf technische Fähigkeiten, Erfahrung und praktischen Mehrwert. Vermeide vage Business-Floskeln. Gib NUR den finalen Text zurück:\n\n",
-        "fr": "Réécris ce résumé de profil CV de manière professionnelle et naturelle. Le texte doit sembler rédigé par un vrai développeur et non par une IA. Utilise 3 à 4 phrases courtes et percutantes. Mets l'accent sur les compétences techniques, l'expérience et la valeur pratique. Évite les formulations vagues et trop corporatives. Retourne UNIQUEMENT le texte final :\n\n",
-    },
-    "experience": {
-        "ka": "გადააკეთე ეს სამუშაო გამოცდილების აღწერა პროფესიონალურ ჭრილში. აქციე ის მოკლე, ეფექტურ პუნქტებად ან ტექსტად, სადაც ჩანს მიღწევები და ტექნოლოგიები. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
-        "en": "Rewrite this job experience description professionally. Focus on achievements, responsibilities, and technologies used. Return ONLY the final text:\n\n",
-        "ru": "Перепиши это описание опыта работы профессионально. Сделай акцент на достижениях и используемых технологиях. Верни ТОЛЬКО итоговый текст:\n\n",
-        "de": "Schreibe diese Berufserfahrung professionell um. Konzentriere dich auf Erfolge und eingesetzte Technologien. Gib NUR den finalen Text zurück:\n\n",
-        "fr": "Réécris cette description d'expérience professionnelle de manière formelle. Mets en valeur les réalisations et les technologies utilisées. Retourne UNIQUEMENT le texte final :\n\n",
-    },
-    "coverLetter": {
-        "ka": "გადააკეთე ეს სამოტივაციო წერილი პროფესიონალურ, თბილ და დამაჯერებელ ტონში. ტექსტი უნდა ჟღერდეს როგორც რეალური ადამიანის მიერ დაწერილი, არა შაბლონურად. შეინარჩუნე ორიგინალის კონკრეტული ფაქტები (თანამდებობა, კომპანია, უნარები), უბრალოდ გააუმჯობესე ჩამოყალიბება და სტრუქტურა. დააბრუნე მხოლოდ საბოლოო ტექსტი:\n\n",
-        "en": "Rewrite this cover letter in a professional, warm, and persuasive tone. It should sound genuinely human-written, not generic or templated. Keep the original's specific facts (role, company, skills) but improve the phrasing and structure. Return ONLY the final text:\n\n",
-        "ru": "Перепиши это сопроводительное письмо в профессиональном, тёплом и убедительном тоне. Текст должен звучать искренне, не шаблонно. Сохрани конкретные факты оригинала (должность, компания, навыки), но улучши формулировки и структуру. Верни ТОЛЬКО итоговый текст:\n\n",
-        "de": "Schreibe dieses Anschreiben in einem professionellen, warmen und überzeugenden Ton um. Es soll authentisch klingen, nicht generisch. Behalte die konkreten Fakten des Originals (Position, Unternehmen, Fähigkeiten) bei, verbessere aber Formulierung und Struktur. Gib NUR den finalen Text zurück:\n\n",
-        "fr": "Réécris cette lettre de motivation dans un ton professionnel, chaleureux et convaincant. Le texte doit sembler authentique, pas générique. Conserve les faits concrets de l'original (poste, entreprise, compétences) mais améliore la formulation et la structure. Retourne UNIQUEMENT le texte final :\n\n",
-    },
+  "about": {
+    "ka": "გადააკეთე ეს CV პროფილის ტექსტი პროფესიონალურად და ბუნებრივად. ტექსტი უნდა ჟღერდეს როგორც რეალური დეველოპერის მიერ დაწერილი. გამოიყენე მაქსიმუმ 2-3 მოკლე წინადადება. ფოკუსირდი ტექნიკურ უნარებზე და პრაქტიკულ ღირებულებაზე. არ გამოიყენო ვარსკვლავები (**), დატოვე მხოლოდ სუფთა ტექსტი:\n\n",
+    "en": "Rewrite this CV profile summary professionally and naturally in max 2-3 short sentences. Focus on core technical skills. Do not use asterisks (**), return clean text:\n\n",
+    "ru": "Перепиши этот текст профиля для CV профессионально и кратко (максимум 2-3 коротких предложения). Не используй звездочки (**), верни чистый текст:\n\n",
+    "de": "Schreibe diese Profilbeschreibung professionell und kurz (max. 2-3 Sätze) um. Verwende keine Sternchen (**), gib reinen Text zurück:\n\n",
+    "fr": "Réécris ce résumé de profil CV de manière concise (max 2-3 phrases courtes). N'utilise pas d'astérisques (**), retourne du texte brut :\n\n"
+  },
+  "experience": {
+    "ka": "გადააკეთე ეს სამუშაო გამოცდილების აღწერა ძალიან მოკლედ. თითოეული პუნქტი გააკეთე მაქსიმუმ 1 მოკლე და ტევადი წინადადება. არ გამოიყენო ვარსკვლავები (**), არ დატოვო ცარიელი ხაზები:\n\n",
+    "en": "Rewrite this job experience description very concisely. Make each bullet point maximum 1 short and punchy sentence. Do not use asterisks (**), do not leave empty lines:\n\n",
+    "ru": "Перепиши это описание опыта работы очень кратко (каждый пункт максимум в 1 короткое предложение). Не используй звездочки (**), не оставляй пустые строки:\n\n",
+    "de": "Schreibe diese Berufserfahrung sehr kurz um (jeder Punkt max. 1 kurzer Satz). Verwende keine Sternchen (**), lass keine Leerzeilen:\n\n",
+    "fr": "Réécris cette description d'expérience professionnelle très brièvement (max 1 phrase courte par point). N'utilise pas d'astérisques (**), ne laisse pas de lignes vides :\n\n"
+  },
+  "coverLetter": {
+    "ka": "გადააკეთე ეს სამოტივაციო წერილი მოკლედ და დამაჯერებლად (მაქსიმუმ 3-4 აბზაცი). შეინარჩუნე ძირითადი ფაქტები. არ გამოიყენო ვარსკვლავები (**), დატოვე სუფთა ტექსტი:\n\n",
+    "en": "Rewrite this cover letter concisely (max 3-4 short paragraphs). Keep key facts. Do not use asterisks (**), return clean text:\n\n",
+    "ru": "Перепиши это сопроводительное письмо кратко (максимум 3-4 коротких абзаца). Сохрани ключевые факты. Не используй звездочки (**), верни чистый текст:\n\n",
+    "de": "Schreibe dieses Anschreiben kurz und prägnant um (max. 3-4 kurze Absätze). Behalte Fakten bei. Verwende keine Sternchen (**), gib reinen Text zurück:\n\n",
+    "fr": "Réécris cette lettre de motivation de manière concise (max 3-4 courts paragraphes). Conserve les faits clés. N'utilise pas d'astérisques (**), retourne du texte brut :\n\n"
+  }
 }
+
 
 
 def get_client_ip(request):
