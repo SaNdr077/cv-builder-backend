@@ -81,6 +81,28 @@ ROOT_URLCONF = 'cv_builder.urls'
 GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
 PAYPAL_SECRET = os.getenv('PAYPAL_SECRET')
 
+# BUG FIX (2026-09): Django-ს ნაგულისხმევი cache (LocMemCache) თითოეული
+# gunicorn worker-პროცესის საკუთარ, იზოლირებულ მეხსიერებაშია — worker-ები
+# ერთმანეთს არ უზიარებენ მონაცემებს. DRF-ის throttling (მათ შორის
+# 'ai_improve' scope, იხ. REST_FRAMEWORK ზემოთ) ამ იმავე cache-ს იყენებს
+# IP-ის მიხედვით მთვლელების შესანახად — ანუ პრაქტიკაში ერთი და იმავე
+# მომხმარებლის ორი თანმიმდევრული მოთხოვნა შეიძლება ორ სხვადასხვა
+# worker-ზე მოხვდეს: პირველი "ხედავს" რომ ლიმიტი ამოწურულია (429), მეორე
+# კი — რომელსაც ეს IP საერთოდ არ ჰქონდა დათვლილი — თავისუფლად გაატარებს.
+# მომხმარებლისთვის ეს გამოიყურება როგორც შემთხვევითობა ("ერთხელ ამბობს
+# ლიმიტი ამოწურულია, მეორეჯერვე მაშინვე მუშაობს").
+#
+# გამოსავალი: ფაილზე დაფუძნებული cache, რომელსაც კონტეინერის ყველა
+# worker ერთი და იმავე დისკიდან კითხულობს/წერს — ამის გამო ყველა
+# worker თანმიმდევრულად ხედავს ერთსა და იმავე მთვლელს, დამატებითი
+# ინფრასტრუქტურის (Redis/Memcached) გარეშე.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+    }
+}
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
